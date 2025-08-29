@@ -5,6 +5,10 @@ from typing import Dict, Any, Optional
 import google.generativeai as genai
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 

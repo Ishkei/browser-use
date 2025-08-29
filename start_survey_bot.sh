@@ -55,8 +55,8 @@ case $choice in
     2)
         echo "🐍 Running with local Python..."
         echo "Installing dependencies..."
-        pip install -r requirements_survey.txt
-        python survey_automation.py
+        source .venv/bin/activate
+        python3 survey_automation.py
         ;;
     3)
         echo "🐙 Running with Docker Compose..."
