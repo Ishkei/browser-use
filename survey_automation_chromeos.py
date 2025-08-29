@@ -54,13 +54,27 @@ class ChromeOSSurveyBot:
         
         # ChromeOS-optimized browser profile
         self.browser_profile = BrowserProfile(
-            headless=False,  # Keep visible for monitoring
+            headless=True,  # Use headless mode for ChromeOS compatibility
             minimum_wait_page_load_time=2.0,  # Longer wait for ChromeOS
             wait_between_actions=1.0,  # Slower actions for stability
             viewport_width=1200,
             viewport_height=800,
-            # ChromeOS-specific optimizations
-            use_playwright=True,  # Use Playwright for better ChromeOS compatibility
+            # ChromeOS-specific browser arguments
+            args=[
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--disable-software-rasterizer',
+                '--disable-background-timer-throttling',
+                '--disable-backgrounding-occluded-windows',
+                '--disable-renderer-backgrounding',
+                '--disable-features=TranslateUI',
+                '--disable-ipc-flooding-protection',
+                '--disable-popup-blocking',
+                '--disable-default-apps',
+                '--no-first-run',
+                '--disable-extensions',
+            ]
         )
         
         # Load persona data
