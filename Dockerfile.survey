@@ -1,0 +1,68 @@
+# Survey Automation Dockerfile
+FROM python:3.12-slim
+
+LABEL name="survey-automation-bot" \
+    maintainer="Survey Automation Bot" \
+    description="Browser automation with personality-driven survey responses" \
+    version="1.0"
+
+# Environment variables
+ENV TZ=UTC \
+    LANGUAGE=en_US:en \
+    LC_ALL=C.UTF-8 \
+    LANG=C.UTF-8 \
+    DEBIAN_FRONTEND=noninteractive \
+    PYTHONIOENCODING=UTF-8 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    IN_DOCKER=True
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    gnupg \
+    ca-certificates \
+    fonts-liberation \
+    fonts-noto-core \
+    fonts-dejavu-core \
+    fonts-freefont-ttf \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv for fast dependency management
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependency files
+COPY pyproject.toml uv.lock* ./
+
+# Create virtual environment and install dependencies
+RUN uv venv && \
+    . .venv/bin/activate && \
+    uv sync --all-extras
+
+# Install Chromium browser
+RUN . .venv/bin/activate && \
+    playwright install --with-deps chromium
+
+# Copy application code
+COPY . .
+
+# Install the project
+RUN . .venv/bin/activate && \
+    uv sync --all-extras --locked
+
+# Create data directory
+RUN mkdir -p /data
+
+# Expose ports
+EXPOSE 9242 9222
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import browser_use; print('OK')" || exit 1
+
+# Default command
+CMD ["python", "survey_automation.py"]

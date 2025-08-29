@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  survey-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.survey
+    container_name: survey-automation-bot
+    volumes:
+      - ./data:/data
+      - ./persona.json:/app/persona.json:ro
+      - ./.env:/app/.env:ro
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - BROWSER_USE_HEADLESS=false
+    ports:
+      - "9242:9242"
+      - "9222:9222"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import browser_use; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  data:
