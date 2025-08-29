@@ -79,7 +79,7 @@ Security / Vulnerabilities
 - **Natural Language**: Human-like responses without automation terms
 
 what i would like Browser-Use to do:
-go to the website https://app.topsurveys.app/Surveys login, email:marerise28@gmail.com Password:iinqxnE%kuA#!Evovr3q%
+go to the website https://app.topsurveys.app/Surveys login, email: Password:
 got to survey site, login, go to survey page, scan all of the surveys and see which one to do, fill in pre-screening questions base on the persona file I provided, if you qualify for the survey you will get redirected to a survey router, if you don't qualify for the pre screening questions you will be shown a "you did not qualify for this survey" or something similar, once on the survey router there may be some pre-screening survey router that redirect you to another or to the main survey router,you may run into open-ended questions, answer base on persona once you complete the survey, you may be redirected back to Topsurveys, and rinse and reapeat.
 
 ---
@@ -367,8 +367,8 @@ logger = logging.getLogger(__name__)
 class SurveyAutomationBot:
     def __init__(self):
         """Initialize the survey automation bot."""
-        self.login_email = "marerise28@gmail.com"
-        self.login_password = "iinqxnE%kuA#!Evovr3q%"
+        self.login_email = "your_email_here"
+        self.login_password = "your_password_here"
         self.base_url = "https://app.topsurveys.app/Surveys"
         
         # Initialize Gemini LLM for survey intelligence
@@ -1028,8 +1028,8 @@ logger = logging.getLogger(__name__)
 class SurveyAutomationBot:
     def __init__(self):
         """Initialize the survey automation bot."""
-        self.login_email = "marerise28@gmail.com"
-        self.login_password = "iinqxnE%kuA#!Evovr3q%"
+        self.login_email = "your_email_here"
+        self.login_password = "your_password_here"
         self.base_url = "https://app.topsurveys.app/Surveys"
         
         # Initialize Gemini LLM for survey intelligence
@@ -1654,7 +1654,7 @@ logger = logging.getLogger(__name__)
 class EnhancedSurveyAutomationBot:
     def __init__(self):
         """Initialize the enhanced survey automation bot with Playwright support."""
-        self.login_email = "marerise28@gmail.com"
+        self.login_email = "your_email_here"
         self.login_password = "iinqxnE%kuA#!Evubr3q%"
         self.base_url = "https://app.topsurveys.app/Surveys"
         
@@ -2280,7 +2280,7 @@ logger = logging.getLogger(__name__)
 class EnhancedSurveyAutomationBot:
     def __init__(self):
         """Initialize the enhanced survey automation bot with Playwright support."""
-        self.login_email = "marerise28@gmail.com"
+        self.login_email = "your_email_here"
         self.login_password = "iinqxnE%kuA#!Evubr3q%"
         self.base_url = "https://app.topsurveys.app/Surveys"
         
